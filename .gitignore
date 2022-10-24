@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/DemoMicroserviceApiGatewayOcelot/FileContentIndex/
+
+/.vs/DemoMicroserviceApiGatewayOcelot/DesignTimeBuild/
+
+/.vs/DemoMicroserviceApiGatewayOcelot/v17/
+/.vs/DemoMicroserviceApiGatewayOcelot/ProjectEvaluation/

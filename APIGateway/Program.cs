@@ -29,8 +29,8 @@ app.UseSwagger();
 
 app.UseSwaggerUI( c =>
     {
-        c.SwaggerEndpoint("api/catalog", "Catalog");
-        c.SwaggerEndpoint("api/product", "Product");
+        c.SwaggerEndpoint("/catalog/swagger.json", "Catalog");
+        c.SwaggerEndpoint("/product/swagger.json", "Product");
     }
 );
 

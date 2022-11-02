@@ -1,6 +1,30 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5025
+        }
+      ],
+      "UpstreamPathTemplate": "/catalog/swagger.json",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5057
+        }
+      ],
+      "UpstreamPathTemplate": "/product/swagger.json",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
       "UpstreamPathTemplate": "/gateway/product",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "DownstreamPathTemplate": "/api/product",

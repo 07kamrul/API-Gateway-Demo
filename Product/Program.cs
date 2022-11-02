@@ -1,8 +1,8 @@
-/*using Common;
+//using Common;
 using Product;
 
 var builder = WebApplication.CreateBuilder(args);
-IConfiguration configuration;
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -10,8 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddConsulConfig(builder.Configuration);
+
 Resolver.RegisterServices(builder.Services);
-builder.Services.AddConsulConfig(builder.Configuration);
 
 var app = builder.Build();
 
@@ -26,26 +27,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseConsul(builder.Configuration);
+//app.UseConsul(builder.Configuration);
 app.Run();
-*/
 
 
 
-namespace Product
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}

@@ -1,5 +1,5 @@
-/*using Catalog;
-using Common;
+using Catalog;
+//using Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddConsulConfig(builder.Configuration);
+
+//builder.Services.AddConsulConfig(builder.Configuration);
 
 Resolver.RegisterServices(builder.Services);
 
@@ -26,28 +27,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseConsul(builder.Configuration);
+//app.UseConsul(builder.Configuration);
 
 app.Run();
-*/
 
 
 
 
-namespace Catalog
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}

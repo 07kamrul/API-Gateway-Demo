@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore;
+/*using Microsoft.AspNetCore;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
@@ -14,10 +14,10 @@ builder.Services.AddSwaggerGen();
 
 var ocelotBuilder = WebHost.CreateDefaultBuilder(args);
 
-/*ocelotBuilder.ConfigureServices(s =>
+*//*ocelotBuilder.ConfigureServices(s =>
         s.AddSingleton(ocelotBuilder))
         .ConfigureAppConfiguration(c => 
-        c.AddJsonFile("ocelot.json"));*/
+        c.AddJsonFile("ocelot.json"));*//*
 
 ocelotBuilder.UseUrls("http://*:9000")
              .ConfigureAppConfiguration((hostingContext, config) =>
@@ -30,33 +30,21 @@ ocelotBuilder.UseUrls("http://*:9000")
             .ConfigureServices(services =>
             {
                 services.AddOcelot()
-                    .AddConsul()
-                    // Store the configuration in consul
-                    .AddConfigStoredInConsul();
+                    .AddConsul();
             })
             .Configure(app =>
             {
-                app.UseMvc().UseSwagger().UseSwaggerUI(c =>
+                app.UseMvc()
+                .UseSwagger()
+                .UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/a/swagger.json", "Catalog");
-                    c.SwaggerEndpoint("/b/swagger.json", "Catalog");
+                    c.SwaggerEndpoint("/b/swagger.json", "Product");
                 });
                 app.UseOcelot().Wait();
-            })
-            ;
-
-/*builder.Services.AddOcelot()
-    .AddConsul()
-    .AddConfigStoredInConsul(); //Ocelot added*/
+            });
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseAuthorization();
 
@@ -64,4 +52,28 @@ app.MapControllers();
 
 app.Run();
 
-//app.UseOcelot().Wait();
+*/
+
+
+
+namespace APIGateway
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            })
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config.AddJsonFile("ocelot.json");
+            });
+    }
+}

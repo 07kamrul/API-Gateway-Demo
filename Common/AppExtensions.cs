@@ -1,6 +1,8 @@
 ﻿using Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -20,7 +22,8 @@ namespace Common
             services.AddSingleton<IConsulClient, ConsulClient>(p =>
             new ConsulClient(consulConfig =>
             {
-                var address = configuration["Consul:ConsulAddresss"];
+                var address = configuration["Consul:Host"];
+
                 consulConfig.Address = new Uri(address);
             }));
             return services;
@@ -34,12 +37,21 @@ namespace Common
                 .CreateLogger("AppExtensions");
             var lifetime = app.ApplicationServices.GetRequiredService<IApplicationLifetime>();
 
+            if (!(app.Properties["server.Features"] is FeatureCollection features)) return app;
+
+            var addresses = features.Get<IServerAddressesFeature>();
+            var address = addresses.Addresses.FirstOrDefault();
+
+            Console.WriteLine($"address={address}");
+
+            var uri = new Uri(address);
+
             var registeration = new AgentServiceRegistration()
             {
-                ID = configuration["Consul:ServiceId"],
-                Name = configuration["Consul:ServiceName"],
-                Address = configuration["Consul:ServiceHost"],
-                Port = int.Parse(configuration["Consul.ServicePort"])
+                ID = $"MyService-{uri.Port}",
+                Name = "MyService",
+                Address = $"{uri.Host}",
+                Port = uri.Port
             };
 
             logger.LogInformation("Registering with Consul");
@@ -49,6 +61,7 @@ namespace Common
             lifetime.ApplicationStopping.Register(() =>
             {
                 logger.LogInformation("Unregistering from Consul");
+                consulClient.Agent.ServiceDeregister(registeration.ID).ConfigureAwait(true);
             });
 
             return app;

@@ -1,33 +1,65 @@
 {
-  "ReRoutes": [
+  "Routes": [
     {
-      "UseServiceDiscovery":  true,
-      "DownstreamPathTemplate": "/api/catalog/findall",
-      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/gateway/product",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "DownstreamPathTemplate": "/api/product",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5025
+          "Port": 44339
         }
       ],
-      "UpstreamPathTemplate": "/catalog/findall",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "DangerousAcceptAnyServerCertificateValidator": true
+
     },
     {
-      "UseServiceDiscovery": true,
-      "DownstreamPathTemplate": "/api/product/findall",
-      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/gateway/product/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "DownstreamPathTemplate": "/api/product/ProductVersion/{id}",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5057
+          "Port": 44339
         }
       ],
-      "UpstreamPathTemplate": "/product/findall",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+
+      "DangerousAcceptAnyServerCertificateValidator": true
+
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/catalog",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "DownstreamPathTemplate": "/api/catalog",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44398
+        }
+      ],
+
+      "DangerousAcceptAnyServerCertificateValidator": true
+
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "DownstreamPathTemplate": "/api/catalog/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44398
+        }
+      ],
+
+      "DangerousAcceptAnyServerCertificateValidator": true
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5130"
-    }
+    "BaseUrl": "http://localhost:44353"
+  }
 }

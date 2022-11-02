@@ -7,25 +7,24 @@ namespace Catalog.Controllers
     [Route("api/catalog")]
     public class CatalogController : ControllerBase
     {
-        /*        private ICatalogService catalogService;
-                public CatalogController(ICatalogService _catalogService)
-                {
-                    catalogService = _catalogService;
-                }
+        private ICatalogService catalogService;
+        public CatalogController(ICatalogService _catalogService)
+        {
+            catalogService = _catalogService;
+        }
 
-                [Produces("application/json")]
-                [HttpGet("findall")]
-                public IActionResult FindAll()
-                {
-                    try
-                    {
-                        return Ok(catalogService.FindAll());
-                    }
-                    catch
-                    {
-                        return BadRequest();
-                    }
-                }*/
+        [HttpGet("findall")]
+        public IActionResult FindAll()
+        {
+            try
+            {
+                return Ok(catalogService.FindAll());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
         [HttpGet]
         public List<string> Get()

@@ -4,28 +4,27 @@
       "UpstreamPathTemplate": "/gateway/product",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "DownstreamPathTemplate": "/api/product",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44339
+          "Port": 5057
         }
       ],
       "DangerousAcceptAnyServerCertificateValidator": true
 
     },
     {
-      "UpstreamPathTemplate": "/gateway/product/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ],
-      "DownstreamPathTemplate": "/api/product/ProductVersion/{id}",
-      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/gateway/product/findall",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "DownstreamPathTemplate": "/api/product/findall",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44339
+          "Port": 5057
         }
       ],
-
       "DangerousAcceptAnyServerCertificateValidator": true
 
     },
@@ -33,26 +32,25 @@
       "UpstreamPathTemplate": "/gateway/catalog",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "DownstreamPathTemplate": "/api/catalog",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44398
+          "Port": 5025
         }
       ],
 
       "DangerousAcceptAnyServerCertificateValidator": true
-
     },
     {
-      "UpstreamPathTemplate": "/gateway/catalog/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ],
-      "DownstreamPathTemplate": "/api/catalog/{id}",
-      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/gateway/catalog/findall",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "DownstreamPathTemplate": "/api/catalog/findall",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44398
+          "Port": 5025
         }
       ],
 
@@ -60,6 +58,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:44353"
+    "BaseUrl": "http://localhost:5130"
   }
 }

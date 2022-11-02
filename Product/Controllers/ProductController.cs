@@ -6,18 +6,13 @@ namespace Product.Controllers
     [ApiController]
     [Route("api/product")]
     public class ProductController : ControllerBase
-    {
-        public ProductController()
-        {
-
-        }
-        /*private IProductService productService;
+    {        
+        private IProductService productService;
         public ProductController(IProductService _productService)
         {
             productService = _productService;
         }
 
-        [Produces("application/json")]
         [HttpGet("findall")]
         public IActionResult FindAll()
         {
@@ -29,7 +24,7 @@ namespace Product.Controllers
             {
                 return BadRequest();
             }
-        }*/
+        }
 
         [HttpGet]
         public List<string> Get()
@@ -45,11 +40,5 @@ namespace Product.Controllers
             return productList;
         }
 
-
-        [HttpDelete]
-        public string ProductVersion(int id)
-        {
-            return $"Product with id {id} is removed";
-        }
     }
 }

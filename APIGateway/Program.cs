@@ -25,12 +25,18 @@ var app = builder.Build();
 
 app.UseAuthorization();
 
+app.UseSwagger();
+
+app.UseSwaggerUI( c =>
+    {
+        c.SwaggerEndpoint("api/catalog", "Catalog");
+        c.SwaggerEndpoint("api/product", "Product");
+    }
+);
+
 app.UseOcelot();
 
-app.UseSwagger();
-app.UseSwaggerUI();
 app.UseCors();
-
 
 app.MapControllers();
 
